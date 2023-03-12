@@ -236,10 +236,10 @@
     }
 
     function page_2() {
-      document.getElementById("one").style.display = "none"
-      document.getElementById("two").style.display = "block"
       var ifr = document.getElementById("page_2")
       ifr.src = ifr.src
+      document.getElementById("one").style.display = "none"
+      document.getElementById("two").style.display = "block"
       setTimeout(() => {
         document.getElementById("next_2").style.display = "block"
       },10000)
