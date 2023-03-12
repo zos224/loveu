@@ -1,0 +1,33 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url('image/bg.jpeg');
+}
+#top {
+    margin-top: 5%;
+}
+
+.gift:hover {
+    animation: 0.7s rung linear infinite;
+    cursor: pointer;
+}
+
+@keyframes rung {
+    0% {
+        transform: rotate(20deg);
+    }
+    50% {
+        transform: rotate(-20deg);
+    }
+    100% {
+        transform: rotate(20deg);
+    }
+}
+
+#no {
+    cursor: pointer;
+}
+
+#hongcho {
+    display: none;
+}

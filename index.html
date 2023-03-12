@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_text.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Just for you, baby 💖</title>
+</head>
+<body>
+    <audio style="display:none" id="myAudio" src="music.mp3" controls autoplay></audio>
+    <div id="one" class="abc">
+      <img id="img1" class="img" src="image/z4097394005860_1f15a41bdaefe4166eb51981826f80ca.jpg" alt="">
+      <img id="img2" class="img" src="image/z4097394030677_a3651220a8697b26c15214b81785daf2.jpg" alt="">
+      <img id="img3" class="img" src="image/z4097394053916_8cc3e1247f86e73d9026d46940740684.jpg" alt="">
+      <img id="img4" class="img" src="image/z4174271213142_afe0cfd63ca4990a48ada8d45c960e41.jpg" alt="">
+      <img id="img5" class="img" src="image/z4174960530050_18dba6db5652c28f8b1f4b9dcb278756.jpg" alt="">
+      <img id="img6" class="img" src="image/z4097394075070_7590db8cf481438962a1b7f4400c7af1.jpg" alt="">
+      <canvas id="canvas" style="display: none">
+      </canvas>
+      <div id="typewriter">
+  
+      </div>
+  
+      <button id="btn" onclick="start()" >Sẵn sàng chưa baby, gét gô!!!</button>
+      <div>
+        <button id="next" onclick="page_2()"><i class="fa-solid fa-angles-down"></i></button>
+      </div>
+    </div>
+    <div id="two">
+      <iframe id="page_2" src="draw.html" frameborder="0" scrolling="no"></iframe>
+      <div>
+        <button id="next_2" onclick="page_3()"><i class="fa-solid fa-angles-down"></i></button>
+      </div>
+    </div>
+    <div id="three">
+      <iframe id="page_3" src="gift.html" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <script >
+        var aText = new Array(
+    "Chúc mừng ngày Valentine bé iu của Phong 💖", 
+    "Valentine nào cũng là Valentine mà đúng hong bé, thế nên là hãy để Phong cho bé một thùng ngọt ngào nhoaa :vv",
+    "Chúc bé iu ngày càng xinh đẹp, học giỏi, làm việc hiệu quả, iu Pong, với bớt nóng tính lạiii 😅",
+    "Bé iu của Phong giỏii lắm, thế nên là hãy luôn tự tin vào bản thân bé nha. Phong luôn ở bên bé để lắng nghe, chia sẻ với bé, bé đừng lo chi nha.",
+    "Phong biết bản thân Phong cũng chưa đủ tốt, làm bé mệt mỏi nhiều, nhưng mà Phong vẫn đang cố gắng làm những gì tốt nhất có thể cho bé. Nên là bé ơi, hãy tin Phong nhaa",
+    "Yêu bé nhiều lắm 😘😘😘"
+    );
+    var iSpeed = 100; // time delay of print out
+    var iIndex = 0; // start printing array at this posision
+    var iArrLength = aText[0].length; // the length of the text array
+    var iScrollAt = 20; // start scrolling up at this many lines
+     
+    var iTextPos = 0; // initialise text position
+    var sContents = ''; // initialise contents variable
+    var iRow; // initialise current row
+     
+    function typewriter()
+    {
+     sContents =  ' ';
+     iRow = Math.max(0, iIndex-iScrollAt);
+     var destination = document.getElementById("typewriter");
+     
+     while ( iRow < iIndex ) {
+      sContents += aText[iRow++] + '<br />';
+     }
+     destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "_";
+     if ( iTextPos++ == iArrLength ) {
+      iTextPos = 0;
+      iIndex++;
+      if ( iIndex != aText.length ) {
+       iArrLength = aText[iIndex].length;
+       setTimeout("typewriter()", 800);
+      }
+     } else {
+      setTimeout("typewriter()", iSpeed);
+     }
+    }
+    
+    var canvas = document.getElementById("canvas"),
+    ctx = canvas.getContext("2d"),
+    things = [],
+    thingsCount = 124,
+    mouse = {
+    x: -100,
+    y: -100
+    },
+    minDist = 150;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // object image
+    var image = new Image();
+    image.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Love_heart_uidaodjsdsew.gif/1200px-Love_heart_uidaodjsdsew.gif';
+    for (var i = 0; i < thingsCount; i++) {
+        let thingWidth = Math.floor(Math.random() * 20) + 20;
+        let thingHeight = image.naturalHeight / image.naturalWidth * thingWidth;
+        let speed = Math.floor(Math.random() * 2) + 0.5;
+        things.push({
+          width: thingWidth,
+          height: thingHeight,
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - thingHeight,
+          speed: speed,
+          vY: speed,
+          vX: 0,
+          d: Math.random() * 1.2 - 0.6,
+          stepSize: (Math.random()) / 20,
+          step: 0,
+          angle: Math.random() * 180 - 90,
+          rad: Math.floor(Math.random()),
+          opacity: Math.random() + 0.4,
+          _ratate: Math.floor(Math.random()) // ratate 正負
+        });
+      }
+
+      function drawThings() {
+        things.map((thing) => {
+          ctx.beginPath();
+          thing.rad = (thing.angle * Math.PI) / 180;
+          ctx.save();
+          var cx = thing.x + thing.width / 2;
+          var cy = thing.y + thing.height / 2;
+          ctx.globalAlpha = thing.opacity;
+          ctx.setTransform(
+            Math.cos(thing.rad),
+            Math.sin(thing.rad),
+            -Math.sin(thing.rad),
+            Math.cos(thing.rad),
+            cx - cx * Math.cos(thing.rad) + cy * Math.sin(thing.rad),
+            cy - cx * Math.sin(thing.rad) - cy * Math.cos(thing.rad)
+          );
+          ctx.drawImage(image, thing.x, thing.y, thing.width, thing.height);
+          ctx.restore();
+        });
+      }
+      
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+        drawThings();
+      }
+
+
+      function update() {
+        things.map((thing) => {
+          var dist = Math.sqrt((thing.x - mouse.x) ** 2 + (thing.y - mouse.y) ** 2);
+          
+          if (dist < minDist) {
+            var force = minDist / (dist * dist),
+                xcomp = (mouse.x - thing.x) / dist,
+                ycomp = (mouse.y - thing.y) / dist,
+                deltaV = force * 2; // deplay when hover mouse
+      
+            thing.vX -= deltaV * xcomp;
+            thing.vY -= deltaV * ycomp;
+            
+            if (thing.d * xcomp > 0) {
+              thing.d = 0 - thing.d;
+            }
+          } else {
+            thing.vX *= .98;
+      
+            if (thing.vY < thing.speed) {
+              thing.vY = thing.speed
+            }
+      
+            thing.vX += Math.cos(thing.step += (Math.random() * 0.05)) * thing.stepSize;
+          }
+          
+          thing.y += thing.vY;
+          thing.x += thing.vX + thing.d;
+          
+          var _angle = Math.random() + 0.2;
+          // stuff.angle += _angle;
+          if (thing._ratate == 0) {
+            thing.angle += _angle;
+          } else {
+            thing.angle -= _angle;
+          }
+          
+          if (thing.y > canvas.height) {
+            reset(thing);
+          }
+      
+          if (thing.x > canvas.width || thing.x <(0 - thing.width)) {
+            reset(thing);
+          }
+        });
+      }
+      
+      canvas.addEventListener('mousemove', function(e){
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+
+      function reset(thing) {
+        thing.width = Math.floor(Math.random() * 20) + 20;
+        thing.height = image.naturalHeight / image.naturalWidth * thing.width;
+        thing.x = Math.floor(Math.random() * canvas.width);
+        thing.y = 0 - thing.height;
+        thing.speed = Math.floor(Math.random() * 2) + 0.5
+        thing.vY = thing.speed;
+        thing.vX = 0;
+        // thing.angle = 0;
+        // thing.rad = 0;
+        thing._ratate = Math.floor(Math.random());
+      }
+
+      function tick() {
+        draw();
+        update();
+        requestAnimationFrame(tick);
+      }
+    function start() {
+      var imgs = document.getElementsByClassName('img')
+      for (var i = 0; i < imgs.length; i++)
+      {
+        imgs[i].style.display = "none"
+      }
+      $("#one").removeClass("abc")
+      var btn = document.getElementById("btn")
+      btn.style.display = "none"
+      document.getElementById("canvas").style.display = null
+      typewriter()
+      tick()
+      setTimeout( () => {
+        document.getElementById("next").style.display = "block"
+      }, 70000)
+      document.getElementById("myAudio").play()
+    }
+
+    function page_2() {
+      document.getElementById("one").style.display = "none"
+      document.getElementById("two").style.display = "block"
+      var ifr = document.getElementById("page_2")
+      ifr.src = ifr.src
+      setTimeout(() => {
+        document.getElementById("next_2").style.display = "block"
+      },10000)
+    }
+
+    function page_3() {
+      document.getElementById("two").style.display = "none"
+      document.getElementById("three").style.display = "block"
+    }
+  </script>
+</body>
+</html>

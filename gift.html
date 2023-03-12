@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_gift.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="text-center" id="top">
+        <h1>CHỌN QUÀ THUI BABY</h1>
+    </div>
+    <div class="d-flex flex-column mt-5 text-center">
+        <div class="row ">
+            <div class="col" id="gift1" onclick="swap(id, 'no')">
+                <img class="w-50 gift" src="image/gift.png" alt="">
+            </div>
+            <div class="col" id="gift2" onclick="swap(id, 'no')">
+                <img class="w-50 gift" src="image/gift.png" alt="">
+            </div>
+            <div class="col" id="gift3" onclick="swap(id, 'no')">
+                <img class="w-50 gift" src="image/gift.png" alt="">
+            </div>
+            <div class="col" id="no">
+                <button class="border-0 bg-transparent" data-bs-toggle="modal" data-bs-target="#exampleModal"><img class="w-50" class="no" src="image/no.png" alt=""></button>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col" id="gift4" onclick="swap(id, 'no')">
+                <img class="w-50 gift" src="image/gift.png" alt="">
+            </div>
+            <div class="col" id="gift5" onclick="swap(id, 'no')">
+                <img class="w-50 gift" src="image/gift.png" alt="">
+            </div>
+            <div class="col" id="gift6" onclick="swap(id, 'no')">
+                <img class="w-50 gift" src="image/gift.png" alt="">
+            </div>
+            <div class="col" id="gift7" onclick="swap(id, 'no')">
+                <img class="w-50 gift " src="image/gift.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="w-50 m-auto">
+        <h3 class="text-center rounded-pill mt-5 bg-warning px-3 py-4">Chọn kĩ bé nha, được chọn 1 lần thui đó. Quà rất là có giá trị nhoa :vv</h3>
+    </div>
+    <div class="modal fade" tabindex="-1" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <h2>Bé chắc chưa nà</h2>
+            </div>
+            <div class="modal-footer">
+                <div id="hongcho" class="fs-5 ">Hong cho đâuuuu 😝😝</div>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2 ">Chắc rùi</button>
+              <button type="button" class="btn btn-secondary" onclick="hongcho()">Thui chọn lại i</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" id="exampleModal2" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body text-center">
+              <h2>Ỏhh bé iu thật tuyệt. Bé sẽ nhận được món quà lớn nhất. Là Pong nàaa. Yêu bé quá i 😍 </h2>
+            </div>
+            <div class="modal-footer">
+                <div id="hongcho" class="fs-5 ">Hong cho đâuuuu 😝😝</div>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Iu Pong 😍</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        function swap(id1, id2)
+        {
+            var a = document.getElementById(id1).innerHTML
+            var b = document.getElementById(id2).innerHTML
+            document.getElementById(id1).innerHTML = b 
+            document.getElementById(id2).innerHTML = a
+            document.getElementById(id1).id = "temp"
+            document.getElementById(id2).id = id1
+            document.getElementById("temp").id = id2
+            document.getElementById(id1).setAttribute("onclick", 'swap("' + id1 + '", "no")')
+            document.getElementById(id2).setAttribute("onclick", 'sure()')
+        }
+        function sure()
+        {
+            
+        }
+        function hongcho() {
+            document.getElementById("hongcho").style.display = "block"
+        }
+    </script>
+</body>
+</html>
